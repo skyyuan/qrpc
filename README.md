@@ -1,6 +1,6 @@
 引包
 
-	"http://git.qycam.com/xiaofei/qrpc/src/master/src/qrpc/client"
+	"http://git.qycam.com/xiaofei/qrpc/src/qrpc/client"
 
 初始化
 
