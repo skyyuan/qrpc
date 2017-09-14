@@ -1,25 +1,27 @@
 package qrpc
 
 import (
-	"google.golang.org/grpc"
-	pb "./utils"
-	"log"
-	"golang.org/x/net/context"
 	"fmt"
+	"log"
+
+	pb "github.com/skyyuan/qrpc/utils"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 )
+
 var (
 	Gconn *grpc.ClientConn
 )
 
-func InitGConn(){
-	conn, err := grpc.Dial("localhost:50051",grpc.WithInsecure())
+func InitGConn() {
+	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	Gconn = conn
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 }
 
-func Log(content string, serviceType, serviceFlag, level string){
+func Log(content string, serviceType, serviceFlag, level string) {
 	c := pb.NewLogClient(Gconn)
 
 	r, err := c.Record(context.Background(), &pb.LogRequest{ServiceType: serviceType, ServiceFlag: serviceFlag, Level: level, Content: content})
@@ -33,6 +35,6 @@ func Log(content string, serviceType, serviceFlag, level string){
 	log.Printf("Greeting: %s", r.Status)
 }
 
-func Close(){
+func Close() {
 	defer Gconn.Close()
 }
