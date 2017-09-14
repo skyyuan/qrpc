@@ -11,7 +11,7 @@ It has these top-level messages:
 	LogRequest
 	LogResponse
 */
-package utils
+package main
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"

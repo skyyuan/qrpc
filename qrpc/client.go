@@ -1,7 +1,6 @@
-package client
+package main
 
 import (
-	pb "qrpc/utils"
 	"fmt"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -20,9 +19,9 @@ func InitGConn() {
 }
 
 func Log(content string, serviceType, serviceFlag, level string) {
-	c := pb.NewLogClient(Gconn)
+	c := NewLogClient(Gconn)
 
-	r, err := c.Record(context.Background(), &pb.LogRequest{ServiceType: serviceType, ServiceFlag: serviceFlag, Level: level, Content: content})
+	r, err := c.Record(context.Background(), LogRequest{ServiceType: serviceType, ServiceFlag: serviceFlag, Level: level, Content: content})
 	if err != nil {
 		fmt.Println("could not greet: %v", err)
 		//Close()
